@@ -1,9 +1,11 @@
+BeforeAll {
+  Import-Module SHiPS
+  Move-Item GenFibProvider.ps1 -Destination GenFibProvider.psm1 -Force
+  Import-Module ./GenFibProvider.psm1
+}
+
 Describe 'GenFibProvider' {
   BeforeEach {
-    Write-Host "Running BeforeEach"
-    Import-Module SHiPS
-    Move-Item GenFibProvider.ps1 -Destination GenFibProvider.psm1 -Force
-    Import-Module ./GenFibProvider.psm1
     New-PSDrive -Name GF -Root GenFibProvider#GenFib -PSProvider SHiPS
   }
   It 'Default values should be correct' {
@@ -13,10 +15,12 @@ Describe 'GenFibProvider' {
     Get-Content GF:\Sequence | Should -Be '0,1,1,2,3,5,8,13,21,34'
   }
   AfterEach {
-    Write-Host "Running AfterEach"
     Remove-PSDrive -Name GF
-    Remove-Module GenFibProvider
-    Move-Item GenFibProvider.psm1 -Destination GenFibProvider.ps1 -Force
-    Remove-Module SHiPS
   }
+}
+
+AfterAll {
+  Remove-Module GenFibProvider
+  Move-Item GenFibProvider.psm1 -Destination GenFibProvider.ps1 -Force
+  Remove-Module SHiPS
 }
