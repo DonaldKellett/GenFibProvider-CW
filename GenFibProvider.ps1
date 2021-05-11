@@ -54,7 +54,7 @@ class GenFibOutParam : SHiPSLeaf
   [GenFibInParam]$Order
   [GenFibInParam]$Start
   [GenFibInParam]$Count
-  [int[]]$Content
+  [bigint[]]$Content
 
   GenFibOutParam([string]$name, [GenFibInParam]$order, [GenFibInParam]$start, [GenFibInParam]$count) : base($name)
   {
@@ -82,19 +82,19 @@ class GenFibOutParam : SHiPSLeaf
       return $this.Content -join ','
     }
     if ($this.Order.Value -eq 0) {
-      $this.Content = 1..$this.Count.Value | ForEach-Object { 0 }
+      $this.Content = 1..$this.Count.Value | ForEach-Object { 0n }
       return $this.Content -join ','
     }
     $this.Content = @()
     1..$this.Order.Value | ForEach-Object {
       if ($PSItem -eq $this.Order.Value) {
-        $this.Content += 1
+        $this.Content += 1n
       } else {
-        $this.Content += 0
+        $this.Content += 0n
       }
     }
     while ($this.Content.Count -lt $this.Start.Value + $this.Count.Value) {
-      $next = 0
+      $next = 0n
       1..$this.Order.Value | ForEach-Object {
         $next += $this.Content[-$PSItem]
       }
