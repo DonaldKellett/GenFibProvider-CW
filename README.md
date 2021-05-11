@@ -8,7 +8,7 @@ A minor variant of [GenFibProvider](https://github.com/DonaldKellett/GenFibProvi
 
 The only notable differences compared with the original project are:
 
-- Unit testing with Pester
+- Unit testing with [Pester](https://pester.dev/)
 - The target platform is Linux since Codewars uses a Linux execution environment
 
 ## License
