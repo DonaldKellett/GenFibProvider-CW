@@ -1,5 +1,4 @@
 BeforeAll {
-  Write-Host "Running BeforeAll"
   Import-Module SHiPS
   Move-Item GenFibProvider.ps1 -Destination GenFibProvider.psm1 -Force
   Import-Module ./GenFibProvider.psm1
@@ -32,7 +31,6 @@ Describe 'GenFibProvider' {
 }
 
 AfterAll {
-  Write-Host "Running AfterAll"
   Remove-PSDrive -Name GF
   Remove-Module GenFibProvider
   Move-Item GenFibProvider.psm1 -Destination GenFibProvider.ps1 -Force
